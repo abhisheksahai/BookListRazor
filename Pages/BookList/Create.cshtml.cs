@@ -1,10 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using BookListRazor.Model;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System;
 
 namespace BookListRazor.Pages.BookList
 {
@@ -15,6 +11,8 @@ namespace BookListRazor.Pages.BookList
         {
             _db = db ?? throw new ArgumentNullException(nameof(ApplicationDbContext));
         }
+
+        public Book book { get; set; }
         public void OnGet()
         {
         }

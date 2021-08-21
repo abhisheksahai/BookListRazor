@@ -1,23 +1,26 @@
 using BookListRazor.Model;
 using BookListRazor.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
-using System.Collections.Generic;
 
 namespace BookListRazor.Pages.BookList
 {
-    public class IndexModel : PageModel
+    public class EditModel : PageModel
     {
         private readonly IBookRepository _br;
-        public IndexModel(IBookRepository br)
+
+        public EditModel(IBookRepository br)
         {
             _br = br ?? throw new ArgumentNullException(nameof(IBookRepository));
         }
 
-        public IEnumerable<Book> Books { get; set; }
-        public void OnGet()
+        [BindProperty]
+        public Book book { get; set; }
+
+        public void OnGet(int Id)
         {
-            Books = _br.GetBooks();
+            book = _br.BookExists(Id);
         }
     }
 }

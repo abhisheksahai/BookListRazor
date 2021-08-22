@@ -1,5 +1,6 @@
 using BookListRazor.Model;
 using BookListRazor.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,18 @@ namespace BookListRazor.Pages.BookList
         public void OnGet()
         {
             Books = _br.GetBooks();
+        }
+
+        public IActionResult OnPostDelete(int Id)
+        {
+            if (!_br.DeleteBook(Id))
+            {
+                return NotFound();
+            }
+            else
+            {
+                return RedirectToAction("Index");
+            }
         }
     }
 }

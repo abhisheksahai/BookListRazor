@@ -30,20 +30,31 @@ namespace BookListRazor.Services
             return book;
         }
 
-        public void DeleteBook(Book book)
+        public bool DeleteBook(int Id)
         {
-            _db.Book.Remove(book);
-            Save();
+            bool status = false;
+            var bookFromDb = _db.Book.Find(Id);
+            if (bookFromDb != null)
+            {
+                _db.Book.Remove(bookFromDb);
+                status = Save();
+            }
+            return status;
         }
 
         public void UpdateBook(Book book)
         {
-            throw new NotImplementedException();
+            var bookFromDb = _db.Book.Find(book.Id);
+            bookFromDb.Name = book.Name;
+            bookFromDb.Author = book.Author;
+            bookFromDb.ISBN = book.ISBN;
+            Save();
         }
 
         public bool Save()
         {
-            return (_db.SaveChanges() >= 0);
+            int stateCount = _db.SaveChanges();
+            return (stateCount >= 0);
         }
 
         public void Dispose()

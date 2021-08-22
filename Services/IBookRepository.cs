@@ -12,7 +12,7 @@ namespace BookListRazor.Services
         Book BookExists(int Id);
         Book AddBook(Book book);
         void UpdateBook(Book book);
-        void DeleteBook(Book book);
+        bool DeleteBook(int Id);
         bool Save();
     }
 }

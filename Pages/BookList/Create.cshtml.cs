@@ -15,7 +15,7 @@ namespace BookListRazor.Pages.BookList
         }
 
         [BindProperty]
-        public Book book { get; set; }
+        public Book Book { get; set; }
         public void OnGet()
         {
         }
@@ -24,7 +24,7 @@ namespace BookListRazor.Pages.BookList
         {
             if (ModelState.IsValid)
             {
-                _br.AddBook(book);
+                _br.AddBook(Book);
                 return RedirectToPage("Index");
             }
             else

@@ -16,11 +16,24 @@ namespace BookListRazor.Pages.BookList
         }
 
         [BindProperty]
-        public Book book { get; set; }
+        public Book Book { get; set; }
 
         public void OnGet(int Id)
         {
-            book = _br.BookExists(Id);
+            Book = _br.BookExists(Id);
+        }
+
+        public IActionResult OnPost()
+        {
+            if (ModelState.IsValid)
+            {
+                _br.UpdateBook(Book);
+                return RedirectToPage("Index");
+            }
+            else
+            {
+                return RedirectToPage();
+            }
         }
     }
 }
